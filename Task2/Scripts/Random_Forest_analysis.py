@@ -69,7 +69,7 @@ for eco_var in ecosystem_df.columns:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Training the Random Forest model with adjusted parameters
-    rf = RandomForestRegressor(n_estimators=200,  # Increased from 100 to 200
+    rf = RandomForestRegressor(n_estimators=300,  # Increased from 100 to 200
                                max_depth=30,  # Set max depth of each tree
                                min_samples_split=4,  # Minimum number of samples required to split an internal node
                                min_samples_leaf=2,  # Minimum number of samples required to be at a leaf node
@@ -91,6 +91,22 @@ for eco_var in ecosystem_df.columns:
 N = 2
 top_drivers_gpp = feature_importances['GPP_PI_F'].nlargest(N).index
 top_drivers_reco = feature_importances['RECO_PI_F'].nlargest(N).index
+
+# Assuming 'top_drivers_gpp' is your initial list from the 'nlargest' operation
+#excluded_variables = ['PhotonFlux']
+
+# Filter out the excluded variables
+#top_drivers_gpp = [driver for driver in top_drivers_gpp if driver not in excluded_variables]
+
+
+# Assuming 'top_drivers_gpp' has already been filtered to remove excluded variables
+# included_variable = 'WaterTableDepth'
+# top_drivers_gpp = top_drivers_gpp + [included_variable] if included_variable not in top_drivers_gpp else top_drivers_gpp
+
+
+
+
+
 
 # Prepare the dataframes for saving
 drivers_gpp_df = drivers_df[top_drivers_gpp]

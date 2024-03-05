@@ -155,10 +155,45 @@ plot_variables(final_df, site_code, 'ALL')
 # Assuming final_df is your initial DataFrame
 
 # Define the columns for the drivers DataFrame
-driver_columns = ['PA_F', 'PPFD_IN', 'P_F', 'RH', 'SW_IN_F', 'TA_F', 'T_SONIC', 'VPD_F', 'WS_F', 'TS_F']
+driver_columns = ['PA_F', 'PPFD_IN', 'P_F', 'RH', 'SW_IN_F', 'TA_F', 'T_SONIC', 'VPD_F', 'WS_F', 'TS_F', 'WTD']
 
 # Filter out the driver columns to create the drivers DataFrame
 drivers_df = final_df[driver_columns]
+
+
+
+
+
+short_names = {
+    'PA_F': 'AtmPressure',  # Atmospheric pressure
+    'PPFD_IN': 'PhotonFlux',  # Photosynthetic photon flux density, incoming
+    'P_F': 'Precipitation',  # Assuming this is related to Precipitation (P)
+    'RH': 'RelHumidity',  # Relative humidity
+    'SW_IN_F': 'ShortwaveIn',  # Shortwave radiation, incoming
+    'TA_F': 'AirTemp',  # Air temperature
+    'T_SONIC': 'SonicTemp',  # Sonic temperature
+    'VPD_F': 'VapPressDeficit',  # Vapor Pressure Deficit
+    'WS_F': 'WindSpeed',  # Wind speed
+    'TS_F': 'SoilTemp',  # Assuming this is related to Soil temperature (TS)
+    'WTD': 'WaterTableDepth'  # Water table depth
+}
+
+# Applying short names to the 'drivers_df'
+drivers_df = drivers_df.rename(columns=short_names)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Use the columns not in driver_columns for the ecosystem DataFrame
 ecosystem_columns = [col for col in final_df.columns if col not in driver_columns]
